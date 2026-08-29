@@ -103,10 +103,10 @@ st.markdown("""
 st.caption("Your AI companion for the Land of the Gods — permits, trekking rules, road conditions, "
            "and travel planning across Himachal Pradesh, grounded in real sources.")
 
-groq_key = os.environ.get("GROQ_API_KEY") or st.sidebar.text_input(
+groq_key = os.environ.get("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY", "") or st.sidebar.text_input(
     "Groq API Key", type="password", help="Get a free key at console.groq.com"
 )
-tavily_key = os.environ.get("TAVILY_API_KEY") or st.sidebar.text_input(
+tavily_key = os.environ.get("TAVILY_API_KEY") or st.secrets.get("TAVILY_API_KEY", "") or st.sidebar.text_input(
     "Tavily API Key", type="password", help="Get a free key at tavily.com"
 )
 
