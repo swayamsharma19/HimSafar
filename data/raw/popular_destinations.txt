@@ -1,0 +1,42 @@
+Source: Himachal Pradesh Tourism Guides (district and destination overviews)
+Topic: Popular tourist destinations by district
+
+SHIMLA DISTRICT
+Shimla, the state capital, is known for colonial-era charm, scenic beauty, and the busy Mall Road.
+Top spots: Kufri, Jakhoo Temple, The Ridge, Christ Church.
+Best time to visit: March to June, and December for snow.
+Good for: family trips, romantic getaways, snow activities like tobogganing in Kufri.
+
+KULLU-MANALI DISTRICT
+Kullu is known for the Kullu Dussehra festival, lush valleys, and river rafting; it is the gateway to Manali and Kasol.
+Manali's top spots: Hadimba Temple, Solang Valley, Rohtang Pass.
+Best time to visit: September to November (Kullu); March to June for Manali generally.
+Good for: adventure seekers, honeymooners, trekkers.
+
+MANDI DISTRICT
+Mandi has over 80 ancient temples and is considered a spiritual hub. It is also a base for the Prashar Lake trek.
+Top spots: Rewalsar Lake, Tarna Temple.
+Good for: spiritual retreats, lake visits.
+
+KANGRA DISTRICT (Dharamshala / McLeod Ganj)
+Dharamshala is located in the Kangra Valley and is known for natural beauty and Tibetan culture; it is home to the Dalai Lama.
+Top spots: Tsuglagkhang Complex, Namgyal Monastery, Bhagsunag Temple, Kangra Fort.
+Good for: cultural tourism, monasteries, peaceful getaways.
+
+CHAMBA DISTRICT
+Dalhousie is a small hill station in Chamba district, known for colonial charm and natural scenery.
+Top spots: St. John's Church, Panchpula Waterfall, Khajjiar Lake.
+Good for: colonial-era architecture, lake views.
+
+KINNAUR AND LAHAUL-SPITI DISTRICTS
+Known for high-altitude, remote, arid landscapes. Kalpa is a large village in Kinnaur known for lush forests.
+Spiti Valley offers frozen rivers and snow-covered villages in winter, and stark desert-mountain landscapes in summer.
+Note: parts of these districts require Inner Line Permits (see inner_line_permits.txt for details).
+
+SOLAN DISTRICT
+Kasauli is a serene hill station in Solan district known for natural beauty and a peaceful atmosphere.
+
+OTHER NOTABLE PLACES
+Chail: home to the highest cricket ground in the world; popular with cricket enthusiasts.
+Barot: an offbeat destination near Nargu Wildlife Sanctuary, with trekking trails and evergreen forests.
+Jispa: a village on the banks of the Bhaga River in Lahaul-Spiti, roughly 20 km from Keylong and about 92 km from Manali; often used as a stopover on the Manali-Leh route.
