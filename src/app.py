@@ -11,7 +11,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from rag_chain import ask, load_vector_store
 
-load_dotenv()  # reads a local .env file (not committed to GitHub) if present
+load_dotenv()
 
 st.set_page_config(page_title="Himachal Travel Assistant", page_icon="🏔️")
 
@@ -42,69 +42,52 @@ st.markdown("""
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
     .stChatMessage p,
-.stChatMessage li,
-.stChatMessage strong,
-.stChatMessage span,
-.stChatMessage div {
-    color: #1a1a1a !important;
-    text-shadow: none !important;
-}
+    .stChatMessage li,
+    .stChatMessage strong,
+    .stChatMessage span,
+    .stChatMessage div {
+        color: #1a1a1a !important;
+        text-shadow: none !important;
+    }
     [data-testid="stSidebar"] {
         background-color: rgba(255, 255, 255, 0.95);
     }
     [data-testid="stSidebar"] * {
         color: #1a1a1a !important;
     }
-    .stChatInputContainer, [data-testid="stChatInput"] {
-        background-color: rgba(255, 255, 255, 0.95) !important;
-        border-radius: 14px;
-        border: 2px solid #F4A950;
+
+    [data-testid="stChatInput"] {
+        background-color: #FFFFFF !important;
+        border-radius: 14px !important;
+        border: 2px solid #F4A950 !important;
     }
-    [data-testid="stChatInput"] textarea {
-    color: #1a1a1a !important;
-}
-[data-testid="stChatInput"] textarea::placeholder {
-    color: #6b6b6b !important;
-}
+    [data-testid="stChatInputTextArea"] {
+        background-color: #FFFFFF !important;
+        color: #1a1a1a !important;
+        -webkit-text-fill-color: #1a1a1a !important;
+        caret-color: #1a1a1a !important;
+    }
+    [data-testid="stChatInputTextArea"]::placeholder {
+        color: #6b6b6b !important;
+        -webkit-text-fill-color: #6b6b6b !important;
+    }
+
     .stButton button, [data-testid="stChatInputSubmitButton"] {
         background-color: #F4A950 !important;
         color: white !important;
     }
 
- [data-testid="stBottom"],
-[data-testid="stBottom"] > div,
-[data-testid="stBottomBlockContainer"],
-[data-testid="stBottomBlockContainer"] > div,
-.stChatFloatingInputContainer {
-    background: transparent !important;
-    background-color: transparent !important;
-}
-[data-testid="stBottom"] {
-    background: linear-gradient(180deg, rgba(20,40,60,0) 0%, rgba(10,20,30,0.92) 80%) !important;
-}
+    [data-testid="stBottom"] {
+        background: linear-gradient(180deg, rgba(20,40,60,0) 0%, rgba(10,20,30,0.92) 80%) !important;
+    }
+    [data-testid="stBottom"] > div,
+    [data-testid="stBottomBlockContainer"] {
+        background: transparent !important;
+    }
 
     [data-testid="stHeader"] {
         background: transparent !important;
-        background-color: transparent !important;
     }
-
- textarea, input[type="text"] {
-    color: #1a1a1a !important;
-    -webkit-text-fill-color: #1a1a1a !important;
-}
-textarea::placeholder {
-    color: #6b6b6b !important;
-    -webkit-text-fill-color: #6b6b6b !important;
-}
-[data-testid="stChatInputTextArea"] {
-    color: #1a1a1a !important;
-    -webkit-text-fill-color: #1a1a1a !important;
-    caret-color: #1a1a1a !important;
-}
-[data-testid="stChatInputTextArea"]::placeholder {
-    color: #6b6b6b !important;
-    -webkit-text-fill-color: #6b6b6b !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -162,7 +145,7 @@ if question:
                 "web": "🌐 Live web search",
                 "general_knowledge": "🧠 General knowledge (no source found)",
                 "off_topic": "🚫 Off-topic — declined",
-             }.get(source_type, source_type)
+            }.get(source_type, source_type)
             st.caption(f"Source: {badge}")
 
             with st.expander("View sources used"):
