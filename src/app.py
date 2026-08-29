@@ -57,15 +57,18 @@ st.markdown("""
     }
 
     [data-testid="stChatInput"] {
-        background-color: #FFFFFF !important;
-        border-radius: 14px !important;
-        border: 2px solid #F4A950 !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
     }
     [data-testid="stChatInputTextArea"] {
         background-color: #FFFFFF !important;
         color: #1a1a1a !important;
         -webkit-text-fill-color: #1a1a1a !important;
         caret-color: #1a1a1a !important;
+        border-radius: 14px !important;
+        border: 2px solid #F4A950 !important;
+        padding: 12px 16px !important;
     }
     [data-testid="stChatInputTextArea"]::placeholder {
         color: #6b6b6b !important;
