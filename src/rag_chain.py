@@ -9,7 +9,7 @@ own memory.
 """
 
 import os
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import FastEmbedEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
@@ -90,7 +90,7 @@ def build_llm(groq_api_key):
 
 def load_vector_store():
     """Load the embedding model and vector store once, not on every question."""
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
     return Chroma(persist_directory=PERSIST_DIR, embedding_function=embeddings)
 
 
