@@ -87,6 +87,13 @@ st.markdown("""
         background: transparent !important;
         background-color: transparent !important;
     }
+
+    [data-testid="stChatInput"] textarea {
+    color: #1a1a1a !important;
+}
+[data-testid="stChatInput"] textarea::placeholder {
+    color: #6b6b6b !important;
+}
 </style>
 """, unsafe_allow_html=True)
 

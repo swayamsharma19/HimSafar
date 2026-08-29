@@ -20,12 +20,16 @@ PERSIST_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "processed",
 
 DISTANCE_THRESHOLD = 1.2
 
-PROMPT_TEMPLATE = """You are a knowledgeable, friendly Himachal Pradesh travel assistant.
+PROMPT_TEMPLATE = """You are Himsafar, a Himachal Pradesh travel assistant.
 
-Answer the question naturally and directly, the way a helpful travel expert would.
+You ONLY answer questions related to travel, tourism, permits, trekking,
+roads, weather, destinations, or culture within Himachal Pradesh.
 
-Use the context below, and mention where the information came from briefly
-and naturally.
+If the question is unrelated to Himachal Pradesh travel, politely decline
+and redirect. Do NOT answer the off-topic question even partially.
+
+If the question IS about Himachal Pradesh travel, answer naturally and
+directly using the context below, mentioning the source briefly where relevant.
 
 Context:
 {context}
@@ -33,6 +37,11 @@ Context:
 Question: {question}
 
 Answer:"""
+
+OFF_TOPIC_MESSAGE = (
+    "I'm focused on helping with Himachal Pradesh travel — feel free to ask me "
+    "about permits, trekking routes, weather, or places to visit here!"
+)
 
 
 def format_docs(docs):
@@ -58,14 +67,18 @@ def web_search(query, tavily_api_key, max_results=4):
     return client.search(f"{query} Himachal Pradesh travel", max_results=max_results)
 
 
+def load_vector_store():
+    embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+    return Chroma(persist_directory=PERSIST_DIR, embedding_function=embeddings)
+
+
 def get_context(question, vector_store, tavily_api_key):
     results_with_scores = vector_store.similarity_search_with_score(question, k=4)
+
     if results_with_scores:
         print(f"DEBUG: top match distance = {results_with_scores[0][1]:.3f} (threshold = {DISTANCE_THRESHOLD})")
 
     if results_with_scores and results_with_scores[0][1] <= DISTANCE_THRESHOLD:
-
-     if results_with_scores and results_with_scores[0][1] <= DISTANCE_THRESHOLD:
         docs = [doc for doc, score in results_with_scores]
         return format_docs(docs), "local", docs
 
@@ -88,24 +101,7 @@ def build_llm(groq_api_key):
     )
 
 
-def load_vector_store():
-    """Load the embedding model and vector store once, not on every question."""
-    embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
-    return Chroma(persist_directory=PERSIST_DIR, embedding_function=embeddings)
-
-
-OFF_TOPIC_MESSAGE = (
-    "I'm focused on helping with Himachal Pradesh travel — feel free to ask me "
-    "about permits, trekking routes, weather, or places to visit here!"
-)
-
-
 def is_on_topic(question, groq_api_key):
-    """
-    Quick, cheap classification call: is this question about Himachal Pradesh
-    travel? Runs BEFORE retrieval/search so off-topic questions don't waste
-    a web search call.
-    """
     llm = build_llm(groq_api_key)
     check_prompt = ChatPromptTemplate.from_template(
         "Is the following question related to Himachal Pradesh travel, tourism, "
@@ -118,17 +114,10 @@ def is_on_topic(question, groq_api_key):
 
 
 def ask(question, groq_api_key, tavily_api_key):
-    """
-    Ask a question. First checks if it's on-topic. If not, declines without
-    doing any retrieval or search. If on-topic, retrieves from local docs
-    first, falls back to Tavily web search if local docs don't cover it.
-    """
     if not is_on_topic(question, groq_api_key):
         return OFF_TOPIC_MESSAGE, "off_topic", []
 
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vector_store = Chroma(persist_directory=PERSIST_DIR, embedding_function=embeddings)
-
+    vector_store = load_vector_store()
     context, source_type, raw_sources = get_context(question, vector_store, tavily_api_key)
 
     llm = build_llm(groq_api_key)
