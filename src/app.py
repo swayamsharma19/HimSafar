@@ -96,6 +96,15 @@ textarea::placeholder {
     color: #6b6b6b !important;
     -webkit-text-fill-color: #6b6b6b !important;
 }
+[data-testid="stChatInputTextArea"] {
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    caret-color: #1a1a1a !important;
+}
+[data-testid="stChatInputTextArea"]::placeholder {
+    color: #6b6b6b !important;
+    -webkit-text-fill-color: #6b6b6b !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
