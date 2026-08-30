@@ -1,59 +1,77 @@
-# Himachal Pradesh Travel RAG Assistant
+# 🏔️ HimSafar
 
-A Retrieval-Augmented Generation (RAG) chatbot that answers questions about
-Himachal Pradesh travel — permits, road closures, trekking rules, and safety
-guidelines — grounded in official tourism and government sources, with cited
-answers instead of hallucinated ones.
+> Your AI companion for the Land of the Gods — permits, trekking rules, road conditions, and travel planning across Himachal Pradesh, grounded in real sources.
 
-## Why this project
+**Status:** `Live` &nbsp;|&nbsp; **Type:** `RAG Chatbot` &nbsp;|&nbsp; **Domain:** `Travel & Tourism`
 
-Most student RAG projects are "chat with a generic PDF." This one uses
-messy, real, domain-specific government and tourism content — permit rules
-that vary by route, district, and nationality — which required real decisions
-around chunking, retrieval, and hallucination handling rather than just
-following a tutorial.
+---
 
-## Stack
+## 🌐 Live Demo
 
-- **LangChain** — RAG orchestration
-- **ChromaDB** — local vector database
-- **sentence-transformers (all-MiniLM-L6-v2)** — free, local embeddings
-- **Groq (Llama 3.1 8B)** — fast, free-tier LLM inference
-- **Streamlit** — chat UI
+- 🚀 **App:** [himsafar.streamlit.app](https://himsafar.streamlit.app)
+- 💻 **Source:** this repository
 
-## Setup
+---
+
+## ✨ Features
+
+- 📚 **Grounded answers** — retrieves from a local knowledge base of official Himachal Pradesh tourism/government sources before answering
+- 🌐 **Live web search fallback** — falls back to real-time Tavily search when local documents don't cover a question, instead of guessing
+- 🎯 **Topic-scoped** — politely declines questions unrelated to Himachal Pradesh travel, using a fast pre-classification step to avoid wasted searches
+- 🔍 **Source transparency** — every answer shows whether it came from local documents, the web, or general knowledge
+- 🎨 **Custom themed UI** — mountain-themed design built with Streamlit + custom CSS
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|---|---|
+| 🐍 Python | Core application logic |
+| 🦜 LangChain | RAG orchestration & prompt chaining |
+| 🔮 FastEmbed | Local text embeddings |
+| 🗄️ ChromaDB | Vector database for document retrieval |
+| ⚡ Groq (Llama) | LLM inference |
+| 🔎 Tavily | Live web search API |
+| 🎈 Streamlit | Chat UI & deployment |
+
+---
+
+## 📂 Project Structure
+HimSafar/
+├── src/
+│ ├── app.py # Streamlit chat UI
+│ ├── rag_chain.py # RAG pipeline: retrieval, web fallback, generation
+│ └── build_index.py # Builds the local vector index from data/raw/
+├── data/
+│ └── raw/ # Source documents (permits, destinations, seasons, safety)
+├── requirements.txt
+└── README.md
+
+
+---
+
+## 🧠 Design Decisions
+
+- **Chunking & retrieval threshold** tuned by testing real questions against actual similarity scores, not guessed values
+- **Topic guardrail** runs a cheap classification call *before* retrieval, so off-topic questions never trigger a wasted search
+- **Graceful degradation** — if web search fails, the app falls back to general knowledge rather than crashing
+
+---
+
+## 🚀 Run Locally
 
 ```bash
 pip install -r requirements.txt
-
-# 1. Build the vector index from the source documents in data/raw/
 python src/build_index.py
-
-# 2. Get a free API key at https://console.groq.com
-
-# 3. Run the chat app
 streamlit run src/app.py
 ```
 
-## Design decisions worth mentioning in interviews
+Requires free API keys from [Groq](https://console.groq.com) and [Tavily](https://tavily.com), set in a `.env` file:
+GROQ_API_KEY=your_key
+TAVILY_API_KEY=your_key
 
-- **Chunk size (500 chars, 100 overlap):** government/permit text has dense,
-  standalone facts — smaller chunks with overlap preserve context across
-  boundaries without diluting retrieval with irrelevant text.
-- **Grounded-answer prompting:** the system prompt explicitly instructs the
-  model to say "I don't know" when context is insufficient, rather than
-  guessing — the core problem RAG is meant to solve.
-- **Source citation:** every answer shows which document(s) it drew from,
-  so answers are verifiable, not just plausible-sounding.
-- **Local embeddings:** using a free local embedding model instead of a paid
-  API keeps the project runnable by anyone without cost, and avoids sending
-  data to a third party unnecessarily.
 
-## Next steps / possible extensions
+---
 
-- Expand `data/raw/` with more scraped government sources (real scraping
-  script, not just static files).
-- Add an evaluation step (e.g. a set of test questions with expected answers)
-  to measure retrieval quality.
-- Swap the local Chroma store for a hosted vector DB if scaling beyond a
-  demo.
+**Built by [Swayam Sharma](https://github.com/swayamsharma19)**
