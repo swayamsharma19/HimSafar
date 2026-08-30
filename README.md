@@ -49,7 +49,6 @@
 | 🎨 Custom CSS | UI styling |
 | 📄 Markdown | Formatted responses |
 
----
 
 ## 📂 Project Structure
 
@@ -73,7 +72,7 @@ HimSafar/
 ├── 📄 requirements.txt
 └── 📄 runtime.txt
 
----
+
 
 ## 🔄 RAG Pipeline
 
