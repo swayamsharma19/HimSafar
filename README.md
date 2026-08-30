@@ -1,77 +1,188 @@
 # 🏔️ HimSafar
 
-> Your AI companion for the Land of the Gods — permits, trekking rules, road conditions, and travel planning across Himachal Pradesh, grounded in real sources.
+> 🤖 An AI-powered travel companion for exploring Himachal Pradesh with RAG-based insights, real-time web search, and reliable travel information.
 
-**Status:** `Live` &nbsp;|&nbsp; **Type:** `RAG Chatbot` &nbsp;|&nbsp; **Domain:** `Travel & Tourism`
+![Status](https://img.shields.io/badge/Status-Live-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![LangChain](https://img.shields.io/badge/LangChain-RAG-orange)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![Groq](https://img.shields.io/badge/Groq-Llama-purple)
+![Tavily](https://img.shields.io/badge/Tavily-Web%20Search-green)
 
 ---
 
 ## 🌐 Live Demo
 
-- 🚀 **App:** [himsafar.streamlit.app](https://himsafar.streamlit.app)
-- 💻 **Source:** this repository
+🚀 **HimSafar:** https://himsafar.streamlit.app
 
 ---
 
 ## ✨ Features
 
-- 📚 **Grounded answers** — retrieves from a local knowledge base of official Himachal Pradesh tourism/government sources before answering
-- 🌐 **Live web search fallback** — falls back to real-time Tavily search when local documents don't cover a question, instead of guessing
-- 🎯 **Topic-scoped** — politely declines questions unrelated to Himachal Pradesh travel, using a fast pre-classification step to avoid wasted searches
-- 🔍 **Source transparency** — every answer shows whether it came from local documents, the web, or general knowledge
-- 🎨 **Custom themed UI** — mountain-themed design built with Streamlit + custom CSS
+- 🏔️ **Himachal-focused AI Assistant** — Get travel-related information specifically for Himachal Pradesh.
+- 🤖 **RAG-based Responses** — Retrieves relevant information from a dedicated knowledge base before generating answers.
+- 🌐 **Real-Time Web Search** — Uses Tavily to find updated information when the local knowledge base is insufficient.
+- 🎯 **Topic Guardrails** — Keeps conversations focused on Himachal Pradesh travel and tourism.
+- 🔍 **Source-Aware Answers** — Identifies whether information comes from local documents, web search, or general knowledge.
+- 🥾 **Travel & Trekking Information** — Ask about destinations, trekking rules, permits, seasons, road conditions, safety, and more.
+- 🎨 **Mountain-Themed UI** — A clean and simple Streamlit interface inspired by the landscapes of Himachal Pradesh.
+
+---
+
+## 🧠 How It Works
+
+User Question
+      ↓
+Topic Check
+      ↓
+Himachal-related?
+   ↙       ↘
+ Yes       No
+  ↓         ↓
+ChromaDB   Reject
+Retrieval
+  ↓
+Relevant Context?
+   ↙       ↘
+ Yes       No
+  ↓         ↓
+  │      Tavily Web Search
+  │         ↓
+  └────→ Groq / Llama
+             ↓
+        Final Answer
 
 ---
 
 ## 🛠️ Tech Stack
 
+### 🤖 AI & RAG
+
 | Technology | Usage |
-|---|---|
+|------------|-------|
 | 🐍 Python | Core application logic |
-| 🦜 LangChain | RAG orchestration & prompt chaining |
-| 🔮 FastEmbed | Local text embeddings |
-| 🗄️ ChromaDB | Vector database for document retrieval |
-| ⚡ Groq (Llama) | LLM inference |
-| 🔎 Tavily | Live web search API |
-| 🎈 Streamlit | Chat UI & deployment |
+| 🦜 LangChain | RAG pipeline and orchestration |
+| 🔮 FastEmbed | Text embeddings |
+| 🗄️ ChromaDB | Vector database |
+| ⚡ Groq | Fast LLM inference |
+| 🧠 Llama | Language model |
+| 🔎 Tavily | Real-time web search |
+
+### 🎨 Application
+
+| Technology | Usage |
+|------------|-------|
+| 🎈 Streamlit | Web application |
+| 🎨 Custom CSS | UI styling |
+| 📄 Markdown | Formatted responses |
 
 ---
 
 ## 📂 Project Structure
+
 HimSafar/
-├── src/
-│ ├── app.py # Streamlit chat UI
-│ ├── rag_chain.py # RAG pipeline: retrieval, web fallback, generation
-│ └── build_index.py # Builds the local vector index from data/raw/
-├── data/
-│ └── raw/ # Source documents (permits, destinations, seasons, safety)
-├── requirements.txt
-└── README.md
-
-
----
-
-## 🧠 Design Decisions
-
-- **Chunking & retrieval threshold** tuned by testing real questions against actual similarity scores, not guessed values
-- **Topic guardrail** runs a cheap classification call *before* retrieval, so off-topic questions never trigger a wasted search
-- **Graceful degradation** — if web search fails, the app falls back to general knowledge rather than crashing
-
----
-
-## 🚀 Run Locally
-
-```bash
-pip install -r requirements.txt
-python src/build_index.py
-streamlit run src/app.py
-```
-
-Requires free API keys from [Groq](https://console.groq.com) and [Tavily](https://tavily.com), set in a `.env` file:
-GROQ_API_KEY=your_key
-TAVILY_API_KEY=your_key
-
+│
+├── 📁 .streamlit/
+│   └── config.toml
+│
+├── 📁 data/
+│   └── 📁 raw/
+│       └── Source documents
+│
+├── 📁 src/
+│   ├── app.py
+│   ├── rag_chain.py
+│   └── build_index.py
+│
+├── 📄 .gitignore
+├── 📄 README.md
+├── 📄 requirements.txt
+└── 📄 runtime.txt
 
 ---
 
-**Built by [Swayam Sharma](https://github.com/swayamsharma19)**
+## 🔄 RAG Pipeline
+
+HimSafar follows a retrieval-first approach.
+
+### 1️⃣ Ask
+
+The user asks a travel-related question.
+
+### 2️⃣ Classify
+
+The system checks whether the question is related to Himachal Pradesh.
+
+### 3️⃣ Retrieve
+
+Relevant information is retrieved from the local ChromaDB vector database.
+
+### 4️⃣ Search
+
+If sufficient information is not found, Tavily performs a real-time web search.
+
+### 5️⃣ Generate
+
+The retrieved information is passed to the Llama model through Groq.
+
+### 6️⃣ Respond
+
+HimSafar generates a clear answer using the available context.
+
+---
+
+## 🔑 API Keys
+
+HimSafar uses:
+
+- ⚡ **Groq** for LLM inference
+- 🔎 **Tavily** for real-time web search
+
+> ⚠️ Never commit your `.env` file or expose your API keys publicly.
+
+---
+
+## 🌟 Why HimSafar?
+
+Generic AI assistants may provide broad travel information.
+
+HimSafar is specifically designed around **Himachal Pradesh**, combining:
+
+📚 Local Knowledge
++
+🔍 Vector Search
++
+🤖 RAG
++
+🌐 Real-Time Web Search
++
+🧠 LLM
+↓
+🏔️ AI Travel Assistant
+
+This allows travelers to get more relevant and context-aware information for their Himachal Pradesh journeys.
+
+---
+
+## 🌄 Domain
+
+**Travel & Tourism**
+
+HimSafar focuses on helping travelers explore Himachal Pradesh with AI-assisted and source-grounded information.
+
+---
+
+## 👨‍💻 Developer
+
+### Swayam Sharma
+
+- 🐙 GitHub: [@swayamsharma19](https://github.com/swayamsharma19)
+- 💼 LinkedIn: [swayamsharma19](https://www.linkedin.com/in/swayamsharma19/)
+
+---
+
+## ❤️ Made for Himachal Pradesh
+
+> Made with ❤️ for the mountains, valleys, and people of Himachal Pradesh 🏔️
+
+⭐ If you found HimSafar useful, consider giving the repository a star!
