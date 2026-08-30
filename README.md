@@ -53,6 +53,7 @@
 
 ## 📂 Project Structure
 
+```text
 HimSafar/
 │
 ├── 📁 .streamlit/
