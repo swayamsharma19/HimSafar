@@ -27,6 +27,8 @@
 - 🥾 **Travel & Trekking Information** — Ask about destinations, trekking rules, permits, seasons, road conditions, safety, and more.
 - 🎨 **Mountain-Themed UI** — A clean and simple Streamlit interface inspired by the landscapes of Himachal Pradesh.
 
+---
+
 ## 🛠️ Tech Stack
 
 ### 🤖 AI & RAG
@@ -49,6 +51,7 @@
 | 🎨 Custom CSS | UI styling |
 | 📄 Markdown | Formatted responses |
 
+---
 
 ## 📂 Project Structure
 
@@ -71,8 +74,9 @@ HimSafar/
 ├── 📄 README.md
 ├── 📄 requirements.txt
 └── 📄 runtime.txt
+```
 
-
+---
 
 ## 🔄 RAG Pipeline
 
@@ -121,16 +125,16 @@ Generic AI assistants may provide broad travel information.
 
 HimSafar is specifically designed around **Himachal Pradesh**, combining:
 
-📚 Local Knowledge
-+
-🔍 Vector Search
-+
-🤖 RAG
-+
-🌐 Real-Time Web Search
-+
-🧠 LLM
-↓
+📚 Local Knowledge  
+↓  
+🔍 Vector Search  
+↓  
+🤖 RAG  
+↓  
+🌐 Real-Time Web Search  
+↓  
+🧠 LLM  
+↓  
 🏔️ AI Travel Assistant
 
 This allows travelers to get more relevant and context-aware information for their Himachal Pradesh journeys.
