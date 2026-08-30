@@ -27,33 +27,6 @@
 - 🥾 **Travel & Trekking Information** — Ask about destinations, trekking rules, permits, seasons, road conditions, safety, and more.
 - 🎨 **Mountain-Themed UI** — A clean and simple Streamlit interface inspired by the landscapes of Himachal Pradesh.
 
----
-
-## 🧠 How It Works
-
-User Question
-      ↓
-Topic Check
-      ↓
-Himachal-related?
-   ↙       ↘
- Yes       No
-  ↓         ↓
-ChromaDB   Reject
-Retrieval
-  ↓
-Relevant Context?
-   ↙       ↘
- Yes       No
-  ↓         ↓
-  │      Tavily Web Search
-  │         ↓
-  └────→ Groq / Llama
-             ↓
-        Final Answer
-
----
-
 ## 🛠️ Tech Stack
 
 ### 🤖 AI & RAG
